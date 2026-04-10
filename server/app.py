@@ -1,9 +1,9 @@
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any
 
 # Adjust imports based on your directory structure. 
-# Assuming the container runs from the root of the project.
 from models import ZeroLeakAction, ZeroLeakObservation, ZeroLeakState
 from server.my_env_environment import ZeroLeakEnv
 
@@ -13,7 +13,7 @@ app = FastAPI(title="Zero-Leak OpenEnv Server", version="1.0.0")
 env_instance = ZeroLeakEnv()
 
 # ------------------------------------------------------------------------
-# RESPONSE MODELS: Ensuring strict compliance with OpenEnv expected returns
+# RESPONSE MODELS
 # ------------------------------------------------------------------------
 class StepResponse(BaseModel):
     observation: ZeroLeakObservation
@@ -26,15 +26,10 @@ class StepResponse(BaseModel):
 # ------------------------------------------------------------------------
 @app.get("/")
 async def health_check():
-    """
-    MANDATORY FOR HF SPACES: 
-    The validator and HF Space will ping this to ensure the container is alive (HTTP 200).
-    """
     return {"status": "ok", "environment": "Zero-Leak Engineering Assistant"}
 
 @app.post("/reset", response_model=ZeroLeakObservation)
 async def reset_env():
-    """OpenEnv Spec: Resets the environment for a new episode."""
     try:
         return await env_instance.reset()
     except Exception as e:
@@ -42,7 +37,6 @@ async def reset_env():
 
 @app.post("/step", response_model=StepResponse)
 async def step_env(action: ZeroLeakAction):
-    """OpenEnv Spec: Executes an action and returns the new state/reward."""
     try:
         obs, reward, done, info = await env_instance.step(action)
         return StepResponse(
@@ -56,8 +50,21 @@ async def step_env(action: ZeroLeakAction):
 
 @app.get("/state", response_model=ZeroLeakState)
 async def get_state():
-    """OpenEnv Spec: Returns the hidden internal state of the environment."""
     try:
         return await env_instance.state()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"State retrieval failed: {str(e)}")
+
+
+# =========================================================================
+# THE FIX: MULTI-MODE DEPLOYMENT BLOCK (Required by Meta Validator)
+# =========================================================================
+def main():
+    """
+    This function satisfies the strict 'multi-mode deployment' check.
+    It allows the Scaler automated evaluator to run the server directly.
+    """
+    uvicorn.run(app, host="0.0.0.0", port=7860)
+
+if __name__ == "__main__":
+    main()
