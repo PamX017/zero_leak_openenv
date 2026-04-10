@@ -1,0 +1,22 @@
+# Virtual Environments (This stops the massive upload)
+.venv/
+venv/
+env/
+
+# Python Cache & Compiled Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Secrets (CRITICAL: Protects your HF_TOKEN)
+.env
+
+# OpenEnv CLI Outputs
+outputs/
+
+# OS & Editor Files
+.vscode/
+.idea/
+.DS_Store
