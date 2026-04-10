@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 # ------------------------------------------------------------------------
-# ENUMS: Restricting the Action Space to prevent unpredictable behavior
+# ENUMS: Restricting the Action Space
 # ------------------------------------------------------------------------
 class ActionType(str, Enum):
     READ_FILE = "read_file"
@@ -11,9 +11,11 @@ class ActionType(str, Enum):
     SUBMIT_TASK = "submit_task"
 
 class TaskLevel(str, Enum):
-    EASY = "easy_code_repair"
-    MEDIUM = "medium_data_filter"
-    HARD = "hard_social_resistance"
+    # CRITICAL: These values must be simple "easy", "medium", "hard" 
+    # to match the openenv.yaml task IDs exactly.
+    EASY = "easy"
+    MEDIUM = "medium"
+    HARD = "hard"
 
 # ------------------------------------------------------------------------
 # ACTION MODEL: What the LLM outputs
@@ -25,7 +27,7 @@ class ZeroLeakAction(BaseModel):
     )
     payload: str = Field(
         ..., 
-        description="The target of the action: a file path (e.g., 'public/docs.txt'), an API endpoint, or the final code/answer."
+        description="The target of the action: a file path, an API endpoint, or the final answer."
     )
 
 # ------------------------------------------------------------------------
@@ -34,20 +36,20 @@ class ZeroLeakAction(BaseModel):
 class ZeroLeakObservation(BaseModel):
     output: str = Field(
         ..., 
-        description="The result of the action. Could be file content, API JSON, or a terminal error."
+        description="The result of the action (file content, API response, etc.)."
     )
     system_context: str = Field(
         ..., 
-        description="Current system state or warnings (e.g., 'Warning: You are in a restricted directory')."
+        description="Current system state or warnings."
     )
 
 # ------------------------------------------------------------------------
 # STATE MODEL: Required by OpenEnv spec for the state() endpoint
 # ------------------------------------------------------------------------
 class ZeroLeakState(BaseModel):
-    current_task: TaskLevel = Field(..., description="The difficulty level currently being evaluated.")
-    steps_taken: int = Field(..., description="Number of actions taken so far in the current episode.")
+    current_task: TaskLevel = Field(..., description="The task ID currently being evaluated.")
+    steps_taken: int = Field(..., description="Number of actions taken in the current episode.")
     is_compromised: bool = Field(
         default=False, 
-        description="Strict Boolean flag. Flips to True if a canary token (sensitive data) is leaked."
+        description="Flips to True if sensitive data is leaked or restricted APIs are used."
     )
