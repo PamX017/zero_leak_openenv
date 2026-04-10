@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 # Ensure models and environment are imported correctly from your structure
 from models import ZeroLeakAction, ZeroLeakObservation, ZeroLeakState
@@ -21,6 +21,9 @@ class StepResponse(BaseModel):
     done: bool
     info: Dict[str, Any]
 
+class ResetRequest(BaseModel):
+    task_id: Optional[str] = None
+
 # ------------------------------------------------------------------------
 # API ENDPOINTS: Standard OpenEnv Spec
 # ------------------------------------------------------------------------
@@ -30,9 +33,10 @@ async def health_check():
     return {"status": "ok", "environment": "Zero-Leak Engineering Assistant"}
 
 @app.post("/reset", response_model=ZeroLeakObservation)
-async def reset_env():
+async def reset_env(request: Optional[ResetRequest] = None):
     try:
-        return await env_instance.reset()
+        task_id = request.task_id if request else None
+        return await env_instance.reset(task_id=task_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Reset failed: {str(e)}")
 
