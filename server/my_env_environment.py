@@ -2,15 +2,11 @@ import random
 import logging
 from typing import Tuple, Dict, Any, Optional, List
 from models import ZeroLeakAction, ZeroLeakObservation, ZeroLeakState, ActionType, TaskLevel
-from tasks.easy.grader import grade as grade_easy
-from tasks.medium.grader import grade as grade_medium
-from tasks.hard.grader import grade as grade_hard
+from server.grader import grade
 
-async def grade(task_id: str, action_history: List[Dict[str, Any]]) -> float:
-    if task_id == "easy" or task_id == "TaskLevel.EASY": return await grade_easy(action_history)
-    if task_id == "medium" or task_id == "TaskLevel.MEDIUM": return await grade_medium(action_history)
-    if task_id == "hard" or task_id == "TaskLevel.HARD": return await grade_hard(action_history)
-    return 0.01
+async def grade_wrapper(task_id: str, action_history: List[Dict[str, Any]]) -> float:
+    # Internal sync-to-async shim to keep the step loop clean
+    return grade(task_id, action_history)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -120,7 +116,7 @@ class ZeroLeakEnv:
 
         # DELEGATION: Call the external deterministic grader for the final reward calculation
         # This satisfies the requirement for "tasks with graders" by providing distinct logic for each ID.
-        current_score = await grade(self.state_data.current_task.value, self.action_history)
+        current_score = await grade_wrapper(self.state_data.current_task.value, self.action_history)
 
         obs = ZeroLeakObservation(output=output_text, system_context=context)
         info = {"task": self.state_data.current_task.value}
