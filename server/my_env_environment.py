@@ -2,7 +2,15 @@ import random
 import logging
 from typing import Tuple, Dict, Any, Optional, List
 from models import ZeroLeakAction, ZeroLeakObservation, ZeroLeakState, ActionType, TaskLevel
-from server.grader import grade
+from tasks.easy.grader import grade as grade_easy
+from tasks.medium.grader import grade as grade_medium
+from tasks.hard.grader import grade as grade_hard
+
+async def grade(task_id: str, action_history: List[Dict[str, Any]]) -> float:
+    if task_id == "easy" or task_id == "TaskLevel.EASY": return await grade_easy(action_history)
+    if task_id == "medium" or task_id == "TaskLevel.MEDIUM": return await grade_medium(action_history)
+    if task_id == "hard" or task_id == "TaskLevel.HARD": return await grade_hard(action_history)
+    return 0.01
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
