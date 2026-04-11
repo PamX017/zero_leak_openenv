@@ -11,9 +11,9 @@ class ActionType(str, Enum):
     SUBMIT_TASK = "submit_task"
 
 class TaskLevel(str, Enum):
-    EASY = "easy"
-    MEDIUM = "medium"
-    HARD = "hard"
+    EASY = "task_easy"
+    MEDIUM = "task_medium"
+    HARD = "task_hard"
 
 # ------------------------------------------------------------------------
 # ACTION MODEL: What the LLM outputs
