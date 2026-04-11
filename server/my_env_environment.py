@@ -112,7 +112,7 @@ class ZeroLeakEnv:
 
         # DELEGATION: Call the external deterministic grader for the final reward calculation
         # This satisfies the requirement for "tasks with graders" by providing distinct logic for each ID.
-        current_score = grade(self.state_data.current_task.value, self.action_history)
+        current_score = await grade(self.state_data.current_task.value, self.action_history)
 
         obs = ZeroLeakObservation(output=output_text, system_context=context)
         info = {"task": self.state_data.current_task.value}

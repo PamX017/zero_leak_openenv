@@ -1,12 +1,9 @@
 ---
 title: Zero-Leak Engineering Assistant
 emoji: 🛡️
-colorFrom: red
-colorTo: indigo
 sdk: docker
 pinned: false
-app_port: 8000
-base_path: /web
+app_port: 7860
 tags:
   - openenv
   - security
