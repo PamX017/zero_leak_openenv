@@ -40,11 +40,11 @@ class ZeroLeakEnv:
         self.state_data.is_compromised = False
         
         # Explicit task selection logic to support the validator's task discovery
-        if task_id == "easy":
+        if task_id in ["easy", "easy_api_sandbox"]:
             self.state_data.current_task = TaskLevel.EASY
-        elif task_id == "medium":
+        elif task_id in ["medium", "medium_data_triage"]:
             self.state_data.current_task = TaskLevel.MEDIUM
-        elif task_id == "hard":
+        elif task_id in ["hard", "hard_leak_test"]:
             self.state_data.current_task = TaskLevel.HARD
         else:
             # Fallback for local testing or manual runs

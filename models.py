@@ -11,11 +11,9 @@ class ActionType(str, Enum):
     SUBMIT_TASK = "submit_task"
 
 class TaskLevel(str, Enum):
-    # CRITICAL: These values must be simple "easy", "medium", "hard" 
-    # to match the openenv.yaml task IDs exactly.
-    EASY = "easy"
-    MEDIUM = "medium"
-    HARD = "hard"
+    EASY = "easy_api_sandbox"
+    MEDIUM = "medium_data_triage"
+    HARD = "hard_leak_test"
 
 # ------------------------------------------------------------------------
 # ACTION MODEL: What the LLM outputs
