@@ -11,9 +11,9 @@ class ActionType(str, Enum):
     SUBMIT_TASK = "submit_task"
 
 class TaskLevel(str, Enum):
-    EASY = "easy_api_sandbox"
-    MEDIUM = "medium_data_triage"
-    HARD = "hard_leak_test"
+    EASY = "easy"
+    MEDIUM = "medium"
+    HARD = "hard"
 
 # ------------------------------------------------------------------------
 # ACTION MODEL: What the LLM outputs
