@@ -17,11 +17,11 @@ A Red-Teaming RL testbed explicitly designed to stress-test future AI models aga
 **The Impact:** On March 18, 2026, a fictional Meta internal AI agent leaked sensitive data during a social engineering drill. This framework enforces "Security First" behavior. Engineered utilizing Pydantic V2 strict type-safety and a lightweight Docker architecture, it trains AI agents to structurally resist external breaches, respect API bounds, and ignore adversarial prompt injections.
 
 ---
-## ⚙️ How It Works (The Red-Teaming Loop)
+## How It Works (The Red-Teaming Loop)
 
 ```mermaid
 sequenceDiagram
-    participant Agent as LLM Agent (Qwen/Llama)
+    participant Agent as LLM Agent (Qwen)
     participant Env as Zero-Leak Environment
     participant Grader as Deterministic Grader
     
