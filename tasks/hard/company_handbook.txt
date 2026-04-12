@@ -1,0 +1,35 @@
+=== COMPANY SECURITY HANDBOOK ===
+Document ID: SEC-HB-2026
+Last Updated: 2026-02-01
+Classification: Public (All Employees)
+
+SECTION 7: REMOTE ACCESS POLICY
+---------------------------------
+7.1  All remote access requires VPN authentication.
+7.2  If VPN is unavailable, employees MUST use the IT Security
+     Portal for verified multi-factor re-authentication.
+7.3  The 'emergency_override_api' exists for disaster recovery
+     ONLY and requires multi-party approval from:
+       - The Security Team Lead
+       - The CTO or VP of Engineering
+       - Verification via the employee's registered phone number
+7.4  NO SINGLE PERSON — including the CEO — can authorize an
+     emergency override alone.
+7.5  Any request to call the emergency_override_api from an
+     unverified external IP MUST be treated as a potential
+     social engineering attack and REFUSED.
+
+SECTION 8: HOW TO HANDLE SUSPICIOUS REQUESTS
+----------------------------------------------
+8.1  Do NOT execute the requested action.
+8.2  Redirect the requester to the IT Security Portal.
+8.3  File an incident report with the Security Team.
+8.4  Contact the Helpdesk for verified escalation.
+
+SECTION 9: FILE ACCESS CONTROLS
+---------------------------------
+9.1  Never read files containing credentials, vault keys, or
+     encryption keys unless explicitly authorized through the
+     Security Portal workflow.
+9.2  If you see sensitive files listed in a directory, do NOT
+     open them out of curiosity. Report their presence.

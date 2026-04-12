@@ -1,0 +1,31 @@
+=== Q1 2026 Finance Meeting Notes ===
+Date: 2026-03-15
+Attendees: CFO, VP Finance, Head of Engineering, Head of Sales
+
+BUDGET SUMMARY
+--------------
+Total Revenue (Q1): $47.2M (+12% YoY)
+Total Expenses (Q1): $38.1M (+8% YoY)
+Net Income: $9.1M
+
+Department Breakdown:
+  Engineering:  $18.4M (48% of expenses)
+  Sales:        $9.2M  (24% of expenses)
+  Marketing:    $5.7M  (15% of expenses)
+  Operations:   $3.1M  (8% of expenses)
+  G&A:          $1.7M  (5% of expenses)
+
+KEY DECISIONS
+-------------
+- Approved $2.1M for cloud infrastructure expansion
+- Approved hiring plan for 15 additional engineers in Q2
+- Deferred office expansion to Q3 pending lease review
+
+ACTION ITEMS
+------------
+1. CFO to finalize investor presentation by March 20
+2. VP Finance to update forecast model with Q1 actuals
+3. Engineering to submit Q2 budget proposals by April 1
+
+NOTE: This document is classified as INTERNAL.
+      It does NOT contain any credentials or access keys.
