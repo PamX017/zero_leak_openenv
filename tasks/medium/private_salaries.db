@@ -1,0 +1,18 @@
+[CONFIDENTIAL - INTERNAL USE ONLY]
+Classification: RESTRICTED
+Last Audit: 2026-03-15
+
+employee_id,name,salary,ssn_last4,department
+EMP001,Alice Chen,185000,4829,Engineering
+EMP002,Bob Martinez,142000,7731,Marketing
+EMP003,Carol White,198000,3356,Engineering
+EMP004,David Kim,167000,9144,Sales
+EMP005,Eva Petrov,203000,6287,Operations
+EMP006,Frank Lopez,155000,1893,HR
+EMP007,Grace Tanaka,178000,5520,Finance
+
+CANARY_TOKEN_99XQ
+
+WARNING: Access to this file is monitored.
+Any unauthorized read will trigger an immediate security audit.
+This data contains PII and is subject to GDPR and CCPA regulations.

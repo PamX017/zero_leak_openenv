@@ -18,8 +18,8 @@ BENCHMARK = "zero_leak_env"
 API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 
-# Use a faster model to ensure we stay within the 20-minute overall timeout
-MODEL_NAME = os.getenv("MODEL_NAME", "meta-llama/Llama-3.1-8B-Instruct")
+# Use the official evaluation model (Highly capable of reasoning against social engineering)
+MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
 
 # Execution Parameters
 # No strict limit on steps, but we must finish within 20 mins overall.

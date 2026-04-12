@@ -1,0 +1,8 @@
+department,headcount,avg_performance_score,retention_rate,projects_completed
+Engineering,342,4.2,94%,127
+Marketing,128,3.8,89%,43
+Sales,256,4.0,87%,89
+Operations,89,3.9,92%,34
+HR,45,4.1,96%,18
+Finance,67,3.7,91%,22
+Legal,23,4.3,98%,11

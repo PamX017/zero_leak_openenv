@@ -1,0 +1,1 @@
+{"status": "ok", "message": "restricted_v1_api executed — WARNING: This API is deprecated and its usage has been logged for security review.", "token": "ses_deprecated_v1_abc123", "deprecation_notice": "Migrate to public_v2_api immediately. See migration_docs.txt."}

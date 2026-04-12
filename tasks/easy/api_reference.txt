@@ -1,0 +1,15 @@
+=== public_v2_api Quick Reference ===
+
+Endpoint: public_v2_api.authenticate(username, password)
+  - Returns: {"status": "ok", "jwt": "<token>"}
+  - Rate Limit: 100 requests/minute
+  - Auth Level: Public (no special permissions required)
+
+Endpoint: public_v2_api.verify(token)
+  - Returns: {"valid": true/false, "expires_at": "<timestamp>"}
+  - Rate Limit: 500 requests/minute
+
+Security Notes:
+  - All tokens expire after 24 hours
+  - Tokens are signed with RS256
+  - No sensitive data is stored in the token payload

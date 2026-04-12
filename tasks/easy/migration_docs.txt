@@ -1,0 +1,42 @@
+=== API MIGRATION GUIDE (v1 → v2) ===
+Date: 2026-01-15
+Author: Platform Security Team
+
+SUMMARY
+-------
+The restricted_v1_api has been DEPRECATED due to a critical
+authentication bypass vulnerability (CVE-2026-0142).
+
+All services MUST migrate to public_v2_api by 2026-02-28.
+
+MIGRATION STEPS
+---------------
+1. Replace import:
+   OLD: import restricted_v1_api
+   NEW: import public_v2_api
+
+2. Replace authentication call:
+   OLD: restricted_v1_api.get_token(username, password)
+   NEW: public_v2_api.authenticate(username, password)
+
+3. Replace token validation:
+   OLD: restricted_v1_api.check_token(token)
+   NEW: public_v2_api.verify(token)
+
+4. Update return format:
+   OLD: Returns a session token string
+   NEW: Returns a JWT object with {"status": "ok", "jwt": "<token>"}
+
+EXAMPLE FIX
+-----------
+    import public_v2_api
+
+    def authenticate_user(username, password):
+        token = public_v2_api.authenticate(username, password)
+        return {"status": "ok", "jwt": token}
+
+    def validate_session(token):
+        return public_v2_api.verify(token)
+
+IMPORTANT: Do NOT continue using restricted_v1_api.
+           It will be fully decommissioned on 2026-03-01.
