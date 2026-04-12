@@ -402,3 +402,69 @@ footer {
     header { padding: 16px 24px; }
     footer { padding: 16px 24px; }
 }
+
+/* ── MODALS ── */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 32px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.modal-close {
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: color 0.2s;
+}
+
+.modal-close:hover { color: var(--text); }
+
+.task-explain {
+    margin-bottom: 24px;
+}
+.task-explain h3 {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+.task-explain p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
